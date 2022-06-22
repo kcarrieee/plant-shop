@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&display=swap');
+@import 'variables';
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.body{
+    font-family: $font-family;
+    
+}
+.app__wrapper{
+     background-color: $green-primary;
+}
+
+.App{
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 30px;
+}
+
+.category-wrapper{
+    margin-block: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width:1260px) {
+      flex-direction: column-reverse;
+
+      .categories{
+        margin-top: 2rem;
+        ul{
+          gap: 1rem;
+          justify-content: center;
+        }
+      }
+      
+      }
+  }
+
+@import './components/all'
+
