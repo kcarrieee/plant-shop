@@ -1,13 +1,15 @@
-import { useState } from 'react'
 import Card from './Card'
-import Data from '../data/data.json'
+import SkeletonLoader from './SkeletonLoader'
 
-const CardList = () => {
-  const [data, setData] = useState(Data)
+const CardList = ({data, isLoading}) => {
+
+  
 
   return (
     <div className='grid'>
-        {data.map(item => (<Card key={item.id} {...item}/>))}  
+       {isLoading 
+       ? [...new Array(6)].map((_, index) => < SkeletonLoader key={index}/>)
+       : data.map(item => <Card key={item.id} {...item}/>)}
     </div>
   )
 }

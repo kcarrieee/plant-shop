@@ -1,20 +1,25 @@
 import Navbar from './components/Navbar'
-import CardList from './components/CardList';
-import Categories from './components/Categories';
-import Sort from './components/Sort';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+import NotFound from './pages/NotFound';
 
 function App() {
+  
   return (
-    <div className="app__wrapper">
-      <div className="App">
-        <Navbar/>
-        <div className='category-wrapper'>
-          <Categories/>
-          <Sort/>
+    <Router>
+      <div className="app__wrapper">
+        <div className="App">
+          <Navbar/>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/not-found" element={<NotFound/>}/>
+            <Route path="/*" element={<NotFound/>}/>
+          </Routes>
         </div>
-        <CardList/>
       </div>
-    </div>
+    </Router>
   );
 }
 

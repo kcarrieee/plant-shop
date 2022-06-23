@@ -23,12 +23,16 @@
         align-items: center;
         font-weight: 800;
         font-size: 1.3rem;
+        color: #000;
+        text-decoration: none;
         svg{
             margin-right: 10px;
         }
     }
     &__btn{
         margin-left: auto;
+        color: #000;
+        text-decoration: none;
     }
 }
 
