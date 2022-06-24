@@ -1,8 +1,12 @@
 import {useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSortType } from '../store/slices/FilterSlice'
 
 
-const Sort = ({activeSortType,handleSetSort}) => {
+const Sort = () => {
   const [isopen, setIsopen] = useState(false)
+  const sort = useSelector(state => state.filter.sort)
+  const dispatch = useDispatch()
 
   
   const list = [
@@ -16,7 +20,7 @@ const Sort = ({activeSortType,handleSetSort}) => {
   
 
   const handleSortSelection=(i)=>{
-    handleSetSort(i)
+    dispatch(setSortType(i))
     setIsopen(false)
   }
 
@@ -40,14 +44,14 @@ const Sort = ({activeSortType,handleSetSort}) => {
                   />
                 </svg>
                 <b>Filter by:</b>
-                <span onClick={()=>setIsopen(!isopen)} >{activeSortType.name}</span>
+                <span onClick={()=>setIsopen(!isopen)} >{sort.name}</span>
               </div>
               
                {isopen &&  
                <div className="sort__popup">
                 <ul>
                  {list.map((item,i) =>(
-                  <li key={i} className={activeSortType.sortTypeProp === item.sortTypeProp ? 'active': ''} onClick={()=>handleSortSelection(item)}>{item.name}</li>
+                  <li key={i} className={sort.sortTypeProp === item.sortTypeProp ? 'active': ''} onClick={()=>handleSortSelection(item)}>{item.name}</li>
                  ))}
                 </ul>
                 </div>} 
