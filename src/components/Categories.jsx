@@ -1,8 +1,6 @@
-import { useState } from "react"
 
-const Categories = () => {
+const Categories = ({activeCategory, handleSetCategory}) => {
   const categoryArr = ['All','Rare','Green','Bright','Big leafs']
-  const [activeCategory, setActiveCategory] = useState(0)
 
   return (
        <div className="categories">
@@ -11,7 +9,7 @@ const Categories = () => {
                 <li 
                   key={i} 
                   className={activeCategory === i ? 'active': ''} 
-                  onClick={()=>{setActiveCategory(i)}}
+                  onClick={()=>{handleSetCategory(i)}}
                   >{item}</li>
               ))}
           </ul>

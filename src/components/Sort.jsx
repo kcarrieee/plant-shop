@@ -1,30 +1,26 @@
 import {useState} from 'react'
 
 
-const Sort = () => {
+const Sort = ({activeSortType,handleSetSort}) => {
   const [isopen, setIsopen] = useState(false)
-  const [activeSortType, setActiveSortType] = useState(0)
+
   
-  // const list = [
-  //   {name:'popularity',
-  //   sortTypeProp: 'rating'},
-  //   {name:'price',
-  //   sortTypeProp: 'price'},
-  //   {name:'alphabepic',
-  //   sortTypeProp: 'title'},
-  //   ];
-   const list = [
-    'popularity',
-    'price',
-    'alphabepic',
+  const list = [
+    {name:'popularity',
+    sortTypeProp: 'rating'},
+    {name:'price',
+    sortTypeProp: 'price'},
+    {name:'alphabetic',
+    sortTypeProp: 'title'},
     ];
+  
 
   const handleSortSelection=(i)=>{
-    setActiveSortType(i)
+    handleSetSort(i)
     setIsopen(false)
   }
 
-  const SortByName = list[activeSortType]
+
 
 
 
@@ -44,14 +40,14 @@ const Sort = () => {
                   />
                 </svg>
                 <b>Filter by:</b>
-                <span onClick={()=>setIsopen(!isopen)} >{SortByName}</span>
+                <span onClick={()=>setIsopen(!isopen)} >{activeSortType.name}</span>
               </div>
               
                {isopen &&  
                <div className="sort__popup">
                 <ul>
                  {list.map((item,i) =>(
-                  <li key={i} className={activeSortType === i ? 'active': ''} onClick={()=>handleSortSelection(i)}>{item}</li>
+                  <li key={i} className={activeSortType.sortTypeProp === item.sortTypeProp ? 'active': ''} onClick={()=>handleSortSelection(item)}>{item.name}</li>
                  ))}
                 </ul>
                 </div>} 
