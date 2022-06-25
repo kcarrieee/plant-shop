@@ -2,14 +2,7 @@ import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSortType } from '../store/slices/FilterSlice'
 
-
-const Sort = () => {
-  const [isopen, setIsopen] = useState(false)
-  const sort = useSelector(state => state.filter.sort)
-  const dispatch = useDispatch()
-
-  
-  const list = [
+ export const list = [
     {name:'popularity',
     sortTypeProp: 'rating'},
     {name:'price',
@@ -18,15 +11,15 @@ const Sort = () => {
     sortTypeProp: 'title'},
     ];
   
+const Sort = () => {
+  const [isopen, setIsopen] = useState(false)
+  const sort = useSelector(state => state.filter.sort)
+  const dispatch = useDispatch()
 
   const handleSortSelection=(i)=>{
     dispatch(setSortType(i))
     setIsopen(false)
   }
-
-
-
-
 
   return (
           <div className="sort">
