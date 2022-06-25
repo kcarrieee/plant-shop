@@ -1,8 +1,11 @@
 import { RiShoppingCartLine } from 'react-icons/ri'
 import SearchInput from './SearchInput'
 import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const Navbar = () => {
+  const {items, totalPrice} = useSelector(state => state.cart)
+  const totalCount = items.reduce((acc, cur)=> acc + cur.count, 0)
   return (
     <nav className="navbar">
         <Link className="navbar__logo" to='/'>
@@ -15,8 +18,9 @@ const Navbar = () => {
         <SearchInput/>
         <Link className="navbar__btn" to='/cart'>
         <button className="cart-btn" >
-           $200 
+           ${totalPrice}
          <RiShoppingCartLine />
+         ({totalCount})
         </button>
         </Link>
     </nav>

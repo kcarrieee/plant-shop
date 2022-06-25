@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
+import {useSelector, useDispatch} from 'react-redux'
+import {clearCart} from '../store/slices/CartSlice'
+import EmptyCart from './EmptyCart'
+
 
 const CartPage = () => {
+  const dispatch= useDispatch()
+  const {totalPrice, items} = useSelector(state => state.cart)
+  const totalCount = items.reduce((acc, cur)=> acc + cur.count, 0)
+
+  const clearCartItems = () => {
+      dispatch(clearCart())    
+  }
+
+  if(!totalPrice){
+    
+    return(<EmptyCart/>)
+  }
+  
   return (
      <div className="cart">
           <div className="cart__top">
@@ -17,18 +34,16 @@ const CartPage = () => {
                       <path d="M8.33337 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                  <span>Clear cart</span>
+                  <span onClick={clearCartItems}>Clear cart</span>
                 </div>
             </div>
             <div className="content__tiles">
-                <CartItem/>
-                <CartItem/>
-                <CartItem/>
+              {items.map(item => ( <CartItem key={item.id} {...item}/>))}
             </div>
             <div className="cart__bottom">
               <div className="cart__bottom-details">
-                <span> Plants: <b>3</b> </span>
-                <span> Total: <b>$200</b> </span>
+                <span> Plants: <b>{totalCount}</b> </span>
+                <span> Total: <b>${totalPrice}</b> </span>
               </div>
               <div className="cart__bottom-buttons">
                 <a href="/" className="button button--outline button--add go-back-btn">
