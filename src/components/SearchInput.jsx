@@ -1,16 +1,30 @@
-import { useContext } from 'react'
+import { useContext, useCallback, useState } from 'react'
 import { SearchContext } from '../App'
+import debounce from 'lodash.debounce';
 
 const SearchInput = () => {
     const {search, setSearch} = useContext(SearchContext)
+    const [value, setValue] = useState('')
+
+    const inputDebounce = useCallback(
+    debounce((value)=>{
+      setSearch(value)
+    },400),
+    [])
+    
+    const onChangeInput =(e)=>{
+        setValue(e.target.value)
+        inputDebounce(e.target.value)
+    }
+
   return (
         <div>
            <div className="search">
            <input 
             type="text" 
             placeholder=" "
-            value={search}
-            onChange={(e)=>setSearch(e.target.value)}
+            value={value}   
+             onChange={onChangeInput}
             />
             <div>
                 <svg>
